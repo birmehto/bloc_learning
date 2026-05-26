@@ -1,3 +1,4 @@
+import 'package:bloc_learning/bloc/counter_bloc.dart';
 import 'package:bloc_learning/cubit/counter_cubit.dart';
 import 'package:bloc_learning/home/secon_page.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +10,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counterCubit = BlocProvider.of<CounterCubit>(context);
+    final counterBloc = BlocProvider.of<CounterBloc>(context);
     print("Buil");
     return Scaffold(
       appBar: AppBar(title: const Text('Counter bloc')),
       body: Center(
-        child: BlocBuilder<CounterCubit, int>(
-          bloc: counterCubit,
+        child: BlocBuilder<CounterBloc, int>(
           builder: (context, state) {
             return Text(state.toString(), style: const TextStyle(fontSize: 24));
           },

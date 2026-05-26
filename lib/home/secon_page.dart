@@ -1,3 +1,4 @@
+import 'package:bloc_learning/bloc/counter_bloc.dart';
 import 'package:bloc_learning/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ class SeconPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counterCubit = BlocProvider.of<CounterCubit>(context);
+    final counterBloc = BlocProvider.of<CounterBloc>(context);
     return Scaffold(
       appBar: AppBar(title: Text("Mainus Plus")),
       floatingActionButton: Column(
@@ -15,13 +17,17 @@ class SeconPage extends StatelessWidget {
         children: [
           FloatingActionButton(
             heroTag: 'increment_fab',
-            onPressed: counterCubit.increment,
+            onPressed: () {
+              counterBloc.add(CounterIncrement());
+            },
             child: const Icon(Icons.plus_one),
           ),
           const SizedBox(height: 10),
           FloatingActionButton(
             heroTag: 'decrement_fab',
-            onPressed: counterCubit.decrement,
+            onPressed: () {
+              counterBloc.add(CounterDecrement());
+            },
             child: const Icon(Icons.minimize),
           ),
         ],
