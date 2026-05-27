@@ -1,5 +1,4 @@
 import 'package:bloc_learning/counter_app/bloc/counter_bloc.dart';
-import 'package:bloc_learning/counter_app/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,7 +7,7 @@ class SeconPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final counterCubit = BlocProvider.of<CounterCubit>(context);
+    // final counterCubit = BlocProvider.of<CounterCubit>(context);
     final counterBloc = BlocProvider.of<CounterBloc>(context);
     return Scaffold(
       appBar: AppBar(title: Text("Mainus Plus")),

@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CounterCubit extends Cubit<int> {
@@ -11,7 +12,7 @@ class CounterCubit extends Cubit<int> {
     if (state > 0) {
       emit(state - 1);
     } else {
-      print("Not negitive");
+      debugPrint("Not negitive");
     }
   }
 }
