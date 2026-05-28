@@ -1,10 +1,10 @@
 import 'package:bloc_learning/counter_app/bloc/counter_bloc.dart';
-import 'package:bloc_learning/counter_app/home/secon_page.dart';
+import 'package:bloc_learning/counter_app/home/c_secon_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class CHomePage extends StatelessWidget {
+  const CHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.of(
                 context,
-              ).push(MaterialPageRoute(builder: (context) => SeconPage()));
+              ).push(MaterialPageRoute(builder: (context) => CSeconPage()));
             },
             child: const Icon(Icons.navigate_next),
           ),

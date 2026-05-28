@@ -2,8 +2,8 @@ import 'package:bloc_learning/counter_app/bloc/counter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SeconPage extends StatelessWidget {
-  const SeconPage({super.key});
+class CSeconPage extends StatelessWidget {
+  const CSeconPage({super.key});
 
   @override
   Widget build(BuildContext context) {
