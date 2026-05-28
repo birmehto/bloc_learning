@@ -1,10 +1,10 @@
 import 'package:bloc_learning/login/bloc/auth_bloc.dart';
-import 'package:bloc_learning/login/pages/login_page.dart';
+import 'package:bloc_learning/login/pages/a_login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class AHomePage extends StatelessWidget {
+  const AHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
                       context.read<AuthBloc>().add(AuthLogoutRequest());
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => ALoginPage()),
                       );
                     },
                     child: const Text('Logout'),

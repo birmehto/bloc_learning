@@ -1,16 +1,16 @@
 import 'package:bloc_learning/login/bloc/auth_bloc.dart';
-import 'package:bloc_learning/login/pages/home_page.dart';
+import 'package:bloc_learning/login/pages/a_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class ALoginPage extends StatefulWidget {
+  const ALoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ALoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<ALoginPage> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
 
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
 
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) => AHomePage()),
             );
           }
         },
