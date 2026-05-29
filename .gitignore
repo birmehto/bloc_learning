@@ -43,3 +43,18 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Web related
+.web/
+
+# Executables
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Mac OS
+.DS_Store
+
+# Local environment files
+.env*
