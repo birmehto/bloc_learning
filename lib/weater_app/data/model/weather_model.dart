@@ -3,76 +3,63 @@ import 'dart:convert';
 class WeatherModel {
   final double currentTemp;
   final String currentSky;
-  final double currentPressure;
+  final int currentPressure;
   final double currentWindSpeed;
   final int currentHumidity;
+  final List<HourlyForecastModel> hourlyForecasts;
 
-  WeatherModel({
+  const WeatherModel({
     required this.currentTemp,
     required this.currentSky,
     required this.currentPressure,
     required this.currentWindSpeed,
     required this.currentHumidity,
+    required this.hourlyForecasts,
   });
 
   factory WeatherModel.fromMap(Map<String, dynamic> map) {
-    final currentWeatherData = map['list'][0];
+    final currentWeather = map['list'][0];
 
     return WeatherModel(
-      currentTemp: currentWeatherData['main']['temp'].toDouble(),
-      currentSky: currentWeatherData['weather'][0]['main'],
-      currentPressure: currentWeatherData['main']['pressure'].toDouble(),
-      currentWindSpeed: currentWeatherData['wind']['speed'].toDouble(),
-      currentHumidity: currentWeatherData['main']['humidity'].toInt(),
+      currentTemp: (currentWeather['main']['temp'] as num).toDouble(),
+      currentSky: currentWeather['weather'][0]['main'] as String,
+      currentPressure: currentWeather['main']['pressure'] as int,
+      currentWindSpeed: (currentWeather['wind']['speed'] as num).toDouble(),
+      currentHumidity: currentWeather['main']['humidity'] as int,
+      hourlyForecasts: (map['list'] as List)
+          .skip(1)
+          .map(
+            (forecast) =>
+                HourlyForecastModel.fromMap(forecast as Map<String, dynamic>),
+          )
+          .toList(),
+    );
+  }
+
+  factory WeatherModel.fromJson(String source) =>
+      WeatherModel.fromMap(jsonDecode(source));
+}
+
+class HourlyForecastModel {
+  final double temp;
+  final String sky;
+  final DateTime time;
+
+  const HourlyForecastModel({
+    required this.temp,
+    required this.sky,
+    required this.time,
+  });
+
+  factory HourlyForecastModel.fromMap(Map<String, dynamic> map) {
+    return HourlyForecastModel(
+      temp: (map['main']['temp'] as num).toDouble(),
+      sky: map['weather'][0]['main'] as String,
+      time: DateTime.parse(map['dt_txt'] as String),
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'currentTemp': currentTemp,
-      'currentSky': currentSky,
-      'currentPressure': currentPressure,
-      'currentWindSpeed': currentWindSpeed,
-      'currentHumidity': currentHumidity,
-    };
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory WeatherModel.fromJson(String source) =>
-      WeatherModel.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'WeatherModel(currentTemp: $currentTemp, currentSky: $currentSky, currentPressure: $currentPressure, currentWindSpeed: $currentWindSpeed, currentHumidity: $currentHumidity)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is WeatherModel &&
-        other.currentTemp == currentTemp &&
-        other.currentSky == currentSky &&
-        other.currentPressure == currentPressure &&
-        other.currentWindSpeed == currentWindSpeed &&
-        other.currentHumidity == currentHumidity;
-  }
-
-  @override
-  int get hashCode {
-    return currentTemp.hashCode ^
-        currentSky.hashCode ^
-        currentPressure.hashCode ^
-        currentWindSpeed.hashCode ^
-        currentHumidity.hashCode;
+    return {'temp': temp, 'sky': sky, 'time': time.toIso8601String()};
   }
 }
-
-// final currentWeatherData = data['list'][0];
-
-// final currentTemp = currentWeatherData['main']['temp'];
-// final currentSky = currentWeatherData['weather'][0]['main'];
-// final currentPressure = currentWeatherData['main']['pressure'];
-// final currentWindSpeed = currentWeatherData['wind']['speed'];
-// final currentHumidity = currentWeatherData['main']['humidity'];
